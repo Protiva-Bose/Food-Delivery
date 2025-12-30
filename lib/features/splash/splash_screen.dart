@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, RouteNames.parentScreen);
+      Navigator.pushReplacementNamed(context, RouteNames.foodOnboardingScreen);
     });
   }
 
@@ -72,9 +72,9 @@ class _SplashScreenState extends State<SplashScreen>
                   child: ScaleTransition(
                     scale: _scaleAnimation,
                     child: ShaderMask(
-                      shaderCallback: (bounds) => const LinearGradient(
+                      shaderCallback: (bounds) => LinearGradient(
                         colors: [
-                          Colors.red,
+                          Colors.red.shade900,
                           Color(0xffF09819),
                         ],
                       ).createShader(bounds),

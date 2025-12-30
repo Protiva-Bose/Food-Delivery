@@ -8,7 +8,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150.h,
+      height: 160.h,
       child: ListView.builder(
         itemCount: 6,
         scrollDirection: Axis.horizontal,
@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
               },
               child: Container(
                 margin: EdgeInsets.only(right: 5.w),
-                width: 160.w,
+                width: 180.w,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -61,8 +61,8 @@ class ProductCard extends StatelessWidget {
                           const Text(
                             'French fry with Mango juice',
                             style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
                               color: Color(0xFF4A4A4A),
                             ),
                           ),
@@ -72,24 +72,9 @@ class ProductCard extends StatelessWidget {
                               const Text(
                                 '\$100',
                                 style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w800,
                                   color: Color(0xFF00A9B7),
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              const Icon(
-                                Icons.star,
-                                color: Color(0xFFFFD700),
-                                size: 20,
-                              ),
-                              const SizedBox(width: 5),
-                              const Text(
-                                '4.8',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                               const Spacer(),
@@ -99,11 +84,7 @@ class ProductCard extends StatelessWidget {
                                   color: const Color(0xFF00A9B7),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white70,
-                                  size: 12,
-                                ),
+                                child:Image.asset('assets/icons/buy_icon.png',scale: 6.5,color: Colors.white,)
                               ),
                             ],
                           ),

@@ -5,4 +5,11 @@ class RouteNames {
   static const String parentScreen = '/parentScreen';
   static const String registerScreen = '/registerScreen';
   static const String categoriesScreen = '/categoriesScreen';
+  static const String foodGridScreen = '/foodGridScreen';
+  static const String userInfoScreen = '/userInfoScreen';
+  static const String cartScreen = '/cartScreen';
+  static const String foodOnboardingScreen = '/foodOnboardingScreen';
+  static const String forgotPasswordScreen = '/forgotPasswordScreen';
+  static const String otpScreen = '/otpScreen';
+  static const String setNewPasswordScreen = '/setNewPasswordScreen';
 }
