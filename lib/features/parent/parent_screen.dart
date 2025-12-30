@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:order_bite/features/parent/view_model/parent_view_model.dart';
 import 'package:provider/provider.dart';
+import '../cart/cart_screen.dart';
+import '../categories/category_screen.dart';
 import '../home/presentation/view/screen/home_screen.dart';
+import '../profile/profile_screen.dart';
 
 class ParentScreen extends StatefulWidget {
   const ParentScreen({super.key});
@@ -72,10 +75,10 @@ class _ParentScreenState extends State<ParentScreen>
     return Consumer<ParentViewModel>(
       builder: (__, navParentProvider, child) {
         final List<Widget> pages = [
-          const HomeScreen(),
-          const HomeScreen(),
-          const HomeScreen(),
-          const HomeScreen(),
+           HomeScreen(),
+           CategoryGrid(),
+           CartScreen(),
+           ProfileScreen(),
         ];
 
         return Scaffold(
@@ -122,8 +125,9 @@ class _ParentScreenState extends State<ParentScreen>
                           isSelected: navParentProvider.selectedIndex == 0,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
-                          width: 22.w,
-                          height: 22.h,
+                          width: 14.w,
+                          height: 14.h,
+                          scale: 5,
                         ),
                       ),
 
@@ -133,13 +137,14 @@ class _ParentScreenState extends State<ParentScreen>
                           context: context,
                           index: 1,
                           label: 'Categories',
-                          iconPath: 'assets/icons/home.png',
-                          selectedIconPath: 'assets/icons/home.png',
+                          iconPath: 'assets/icons/categories_Icon.png',
+                          selectedIconPath: 'assets/icons/categories_Icon.png',
                           isSelected: navParentProvider.selectedIndex == 1,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
-                          width: 23.w,
-                          height: 23.h,
+                          width: 15.w,
+                          height: 15.h,
+                          scale: 4.9,
                         ),
                       ),
 
@@ -149,13 +154,14 @@ class _ParentScreenState extends State<ParentScreen>
                           context: context,
                           index: 2,
                           label: 'Cart',
-                          iconPath: 'assets/icons/home.png',
-                          selectedIconPath: 'assets/icons/home.png',
+                          iconPath: 'assets/icons/shops_icon.png',
+                          selectedIconPath: 'assets/icons/shops_icon.png',
                           isSelected: navParentProvider.selectedIndex == 2,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
                           width: 23.w,
                           height: 23.h,
+                          scale: 4.2,
                         ),
                       ),
 
@@ -164,14 +170,15 @@ class _ParentScreenState extends State<ParentScreen>
                         child: _buildNavigationDestinationBar(
                           context: context,
                           index: 3,
-                          label: 'Wish',
-                          iconPath: 'assets/icons/home.png',
-                          selectedIconPath: 'assets/icons/home.png',
+                          label: 'Profile',
+                          iconPath: 'assets/icons/profile_icon.png',
+                          selectedIconPath: 'assets/icons/profile_icon.png',
                           isSelected: navParentProvider.selectedIndex == 3,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
                           width: 15.w,
                           height: 15.h,
+                          scale: 4.2,
                         ),
                       ),
 
@@ -190,6 +197,7 @@ class _ParentScreenState extends State<ParentScreen>
   Widget _buildNavigationDestinationBar({
     required BuildContext context,
     required int index,
+    required double scale,
     required double width,
     required double height,
     required String label,
@@ -208,7 +216,7 @@ class _ParentScreenState extends State<ParentScreen>
           children: [
             GestureDetector(
               onTap: () => _handleNavChange(index),
-              child: Image.asset(iconPath,color: isSelected? Color(0xff00C7C0) : Colors.grey.shade600,scale: 3.8,),
+              child: Image.asset(iconPath,color: isSelected? Color(0xff00C7C0) : Colors.grey.shade600,scale: scale,),
               // child: Image.asset(
               //   isSelected ? selectedIconPath : iconPath,
               //   width: width,
@@ -220,7 +228,7 @@ class _ParentScreenState extends State<ParentScreen>
               label,
               style: TextStyle(
                 color: isSelected ? Color(0xff00C7C0) : Colors.black38,
-                fontSize: 14.sp,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),

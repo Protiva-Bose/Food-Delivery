@@ -79,7 +79,7 @@ class _CarouselExampleState extends State<CarouselExample> {
                               slide["title"]!,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20,
+                                fontSize: 18,
                                 color: Colors.white,
                               ),
                             ),

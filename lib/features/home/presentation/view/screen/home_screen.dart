@@ -2,16 +2,29 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:order_bite/features/cart/cart_screen.dart';
+import 'package:order_bite/features/home/presentation/view/screen/see_all_products_screen.dart';
 import 'package:order_bite/features/home/presentation/view/screen/slider_Screen.dart';
+import 'package:order_bite/features/profile/profile_screen.dart';
+import 'package:order_bite/features/profile/view/user_info.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/route_names.dart';
+import '../../../../profile/view/edit_user_info_screen.dart';
 import '../widgets/category_item.dart';
 import '../widgets/product_card.dart';
 import '../widgets/section_header.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+   HomeScreen({super.key});
+  final Map<String, String> userInfo = {
+    "Name": "John Doe",
+    "Email": "johndoe@example.com",
+    "Phone": "+1234567890",
+    "College": "ABC",
+    "Department": "Science",
+    "Group/Section": "B",
+    "Roll": "41",
+  };
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -27,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    /// ✅ START AUTO SLIDER AFTER FIRST FRAME
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _sliderTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
         if (!_pageController.hasClients) return;
@@ -40,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           curve: Curves.easeInOut,
         );
 
-        setState(() {}); // update indicator
+        setState(() {});
       });
     });
   }
@@ -100,9 +112,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Row(
                         children: [
-                          _actionIcon(Icons.people_outline),
+                          _actionIcon('assets/icons/user_icons.png',(){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+                          }),
                           const SizedBox(width: 10),
-                          _actionIcon(Icons.notifications_active_outlined),
+                          _actionIcon('assets/icons/shop_icons.png',(){  Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));}),
                         ],
                       ),
                     ],
@@ -157,15 +171,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
                     SizedBox(height: 15.h),
-                    SectionHeader(title: 'Top Sold Today', onSeeAllTap: () {  }),
+                    SectionHeader(title: 'Top Sold Today', onSeeAllTap: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));
+                    }),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                     SizedBox(height: 15.h),
-                    SectionHeader(title: 'Special', onSeeAllTap: () {}),
+                    SectionHeader(title: 'Special', onSeeAllTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                     SizedBox(height: 15.h),
-                    SectionHeader(title: 'New', onSeeAllTap: () {}),
+                    SectionHeader(title: 'New', onSeeAllTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                   ],
@@ -178,14 +194,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _actionIcon(IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
+  Widget _actionIcon(String icon,VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Image.asset(icon,scale: 5,),
       ),
-      child: Icon(icon, color: Colors.black),
     );
   }
 
