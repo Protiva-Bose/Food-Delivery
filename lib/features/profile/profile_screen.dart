@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:order_bite/features/auth/view/screens/login_screen.dart';
 import 'package:order_bite/features/profile/view/cancel_order_screen.dart';
 import 'package:order_bite/features/profile/view/order_screen.dart';
 import 'package:order_bite/features/profile/view/shop_contacts_screen.dart';
@@ -7,6 +9,58 @@ import 'package:order_bite/features/profile/view/user_info.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
+
+  void showLogoutDialog(BuildContext context, VoidCallback onLogout) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Column(
+          children: [
+            Image.asset('assets/icons/logout_sticker.png',scale: 2.5,),
+             Text('Logout',style: GoogleFonts.merriweather(
+              fontSize: 30,fontWeight: FontWeight.w800
+            ),),
+          ],
+        ),
+        content: const Text('Are you sure you want to log out of your account?',style: TextStyle(
+          fontSize: 16
+        ),),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.shade600,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              onLogout();
+            },
+            child: GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+                child: const Text('Logout')),
+          ),
+        ],
+      ),
+    );
+  }
 
   final Map<String, String> userInfo = {
     "Name": "John Doe",
@@ -132,6 +186,15 @@ class ProfileScreen extends StatelessWidget {
                     builder: (_) => CancelOrderScreen(orders: orders,),
                   ),
                 ),
+              ),
+              SizedBox(height: 12.h),
+              _buildCard(
+                context,
+                title: "Logout",
+                icon: 'assets/icons/logout.png',
+                onTap: () =>  showLogoutDialog(context, () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                })
               ),
             ],
           ),
