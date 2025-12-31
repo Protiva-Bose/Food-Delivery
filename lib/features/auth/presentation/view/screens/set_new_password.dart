@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order_bite/features/auth/view/screens/login_screen.dart';
+
+import 'login_screen.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
   const SetNewPasswordScreen({super.key});
@@ -177,7 +178,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: 30.h),
                 ],
               ),

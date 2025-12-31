@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:order_bite/features/parent/view_model/parent_view_model.dart';
 import 'package:provider/provider.dart';
-import '../cart/cart_screen.dart';
-import '../categories/category_screen.dart';
-import '../home/presentation/view/screen/home_screen.dart';
-import '../profile/profile_screen.dart';
+import '../../../cart/presentation/view/cart_screen.dart';
+import '../../../categories/presentation/view/category_screen.dart';
+import '../../../home/presentation/view/screen/home_screen.dart';
+import '../../../profile/presentation/view/profile_screen.dart';
 
 class ParentScreen extends StatefulWidget {
   const ParentScreen({super.key});

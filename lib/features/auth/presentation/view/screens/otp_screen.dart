@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:order_bite/features/auth/view/screens/set_new_password.dart';
+import 'package:order_bite/features/auth/presentation/view/screens/set_new_password.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -58,7 +58,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   SizedBox(height: 30.h),
 
-                  // OTP Container
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(18.w),
@@ -98,7 +97,6 @@ class _OtpScreenState extends State<OtpScreen> {
                           ),
                           SizedBox(height: 20.h),
 
-                          // Submit Button
                           SizedBox(
                             width: double.infinity,
                             height: 50.h,
@@ -156,7 +154,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
                           SizedBox(height: 16.h),
 
-                          // Resend OTP
                           TextButton(
                             onPressed: () {
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SetNewPasswordScreen()));

@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
-
 import '../../core/constant/route_names.dart';
-import '../../features/auth/view/screens/forgot_password.dart';
-import '../../features/auth/view/screens/login_screen.dart';
+import '../../features/auth/presentation/view/screens/forgot_password.dart';
+import '../../features/auth/presentation/view/screens/login_screen.dart';
+import '../../features/auth/presentation/view/screens/set_new_password.dart';
 import '../../features/auth/view/screens/otp_Screen.dart';
-import '../../features/auth/view/screens/set_new_password.dart';
-import '../../features/cart/cart_screen.dart';
-import '../../features/categories/categories_see_all_screen.dart';
+import '../../features/cart/presentation/view/cart_screen.dart';
+import '../../features/categories/presentation/view/categories_see_all_screen.dart';
 import '../../features/home/presentation/view/screen/home_screen.dart';
 import '../../features/home/presentation/view/screen/see_all_products_screen.dart';
-import '../../features/onboarding/onboarding_screen.dart';
-import '../../features/parent/parent_screen.dart';
-import '../../features/profile/view/user_info.dart';
-import '../../features/splash/splash_screen.dart';
+import '../../features/onboarding/presentation/view/onboarding_screen.dart';
+import '../../features/parent/presentation/view/parent_screen.dart';
+import '../../features/profile/presentation/view/screens/user_info.dart';
+import '../../features/splash/presentation/view/splash_screen.dart';
 
 class AppRoutes {
   static const String initialRoute = RouteNames.splashScreen;
