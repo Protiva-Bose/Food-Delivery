@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order_bite/features/cart/screens/food_selected_screen.dart';
-import 'package:order_bite/features/cart/screens/order_confirmation_screen.dart';
+import 'package:order_bite/features/cart/presentation/view/screens/food_selected_screen.dart';
+import 'package:order_bite/features/cart/presentation/view/screens/order_confirmation_screen.dart';
 
 class CartScreen extends StatelessWidget {
   CartScreen({super.key});

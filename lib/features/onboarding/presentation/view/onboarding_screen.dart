@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:order_bite/features/auth/view/screens/login_screen.dart';
-import 'package:order_bite/features/parent/parent_screen.dart';
+import 'package:order_bite/features/parent/presentation/view/parent_screen.dart';
+
+import '../../../auth/presentation/view/screens/login_screen.dart';
 
 class OnboardItem {
   final String lottie;

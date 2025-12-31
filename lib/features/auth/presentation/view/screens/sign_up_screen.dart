@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:order_bite/features/auth/view/screens/login_screen.dart';
+
+import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -38,7 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 SizedBox(height: 20.h),
 
-                /// Title
                 Text(
                   "Create Account",
                   style: GoogleFonts.merriweather(
@@ -59,7 +59,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 SizedBox(height: 10.h),
 
-                /// Form Card
                 Container(
                   padding: EdgeInsets.all(20.w),
                   decoration: BoxDecoration(
@@ -121,7 +120,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         SizedBox(height: 20.h),
 
-                        /// Role Selection
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -145,7 +143,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         SizedBox(height: 24.h),
 
-                        /// Sign Up Button
                         SizedBox(
                           width: double.infinity,
                           height: 50.h,
@@ -158,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // TODO: Sign up logic
+
                               }
                             },
                             child: Text(
@@ -206,7 +203,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  /// Input Field Widget
   Widget _inputField({
     required String hint,
     required IconData icon,
@@ -233,7 +229,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  /// Role Chip
   Widget _roleChip(String role) {
     final bool isSelected = selectedRole == role;
 

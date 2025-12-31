@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:order_bite/features/auth/view/screens/sign_up_screen.dart';
-import 'package:order_bite/features/parent/parent_screen.dart';
-
+import 'package:order_bite/features/auth/presentation/view/screens/sign_up_screen.dart';
+import 'package:order_bite/features/parent/presentation/view/parent_screen.dart';
 import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -42,7 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  /// App Title
                   Text(
                     "OrderBite",
                     style: GoogleFonts.merriweather(
@@ -64,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   SizedBox(height: 30.h),
 
-                  /// Login Card
                   Container(
                     padding: EdgeInsets.all(20.w),
                     decoration: BoxDecoration(
@@ -89,10 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                           ),
 
-
                           SizedBox(height: 16.h),
 
-                          /// Password
                           _inputField(
                             hint: "Password",
                             icon: Icons.lock,
@@ -113,7 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           SizedBox(height: 20.h),
 
-                          /// Login Button
                           SizedBox(
                             width: double.infinity,
                             height: 50.h,
@@ -161,7 +155,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   SizedBox(height: 20.h),
 
-                  /// Sign Up Redirect
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
