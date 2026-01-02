@@ -1,4 +1,6 @@
 class RouteNames {
+
+  //Buyer part
   static const String splashScreen = '/';
   static const String home = '/home';
   static const String loginScreen = '/loginScreen';
@@ -12,4 +14,11 @@ class RouteNames {
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String otpScreen = '/otpScreen';
   static const String setNewPasswordScreen = '/setNewPasswordScreen';
+
+  //Seller part
+  static const String sellerParentScreen = '/sellerParentScreen';
+  static const String checkScreen = '/checkScreen';
+  static const String uploadScreen = '/uploadScreen';
+  static const String foodDetailsScreen = '/foodDetailsScreen';
+  static const String sellerProfileScreen = '/sellerProfileScreen';
 }

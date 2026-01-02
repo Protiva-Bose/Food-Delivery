@@ -45,6 +45,7 @@ dependencies:
   carousel_slider: ^5.1.1
   lottie: ^3.3.2
   pin_code_fields: ^8.0.1
+  image_picker: ^1.2.1
 
 
 dev_dependencies:

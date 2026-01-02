@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:order_bite/features/auth/presentation/view/screens/sign_up_screen.dart';
-import 'package:order_bite/features/parent/presentation/view/parent_screen.dart';
+import '../../../../buyer/parent/presentation/view/parent_screen.dart';
+import '../../../../seller/parent/presentation/view/seller_parent_screen.dart';
 import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,8 +18,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isObscure = true;
   bool obscurePassword = true;
+
+  String? selectedRole; // 'Buyer' or 'Seller'
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +82,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       key: _formKey,
                       child: Column(
                         children: [
-
                           _inputField(
                             hint: "Email Address",
                             icon: Icons.email,
@@ -108,6 +110,47 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           SizedBox(height: 20.h),
 
+                          // Role Selection
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ChoiceChip(
+                                label: const Text("Buyer"),
+                                selected: selectedRole == 'Buyer',
+                                selectedColor: Colors.blue.shade200,
+                                backgroundColor: Colors.blue.shade50,
+                                shape: const RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                ),
+                                onSelected: (_) {
+                                  setState(() {
+                                    selectedRole = 'Buyer';
+                                  });
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              ChoiceChip(
+                                label: const Text("Seller"),
+                                selected: selectedRole == 'Seller',
+                                selectedColor: Colors.blue.shade200,
+                                backgroundColor: Colors.blue.shade50,
+                                shape: const RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                ),
+                                onSelected: (_) {
+                                  setState(() {
+                                    selectedRole = 'Seller';
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+
+
+                          SizedBox(height: 20.h),
+
                           SizedBox(
                             width: double.infinity,
                             height: 50.h,
@@ -115,19 +158,36 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF00A9B7),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(12.r),
+                                  borderRadius: BorderRadius.circular(12.r),
                                 ),
                               ),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ParentScreen(),
-                                    ),
-                                  );
+                                  if (selectedRole == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Please select a role"),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                    return;
+                                  }
+
+                                  if (selectedRole == 'Buyer') {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ParentScreen(),
+                                      ),
+                                    );
+                                  } else if (selectedRole == 'Seller') {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SellerParentScreen(),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               child: Text(
@@ -139,14 +199,29 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
+
                           SizedBox(height: 5.h),
+
                           GestureDetector(
-                            onTap: (){
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordScreen(),
+                                ),
+                              );
                             },
                             child: Align(
-                                alignment: AlignmentGeometry.topRight,
-                                child: Text("Forgot Password ?",style: TextStyle(color: Color(0xFF10454C),fontSize: 13.sp,fontWeight: FontWeight.w700),)),
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "Forgot Password ?",
+                                style: TextStyle(
+                                  color: const Color(0xFF10454C),
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -175,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(
                             text: "Sign Up",
                             style: TextStyle(
-                              color: Color(0xFF38E6FF),
+                              color: const Color(0xFF38E6FF),
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
                             ),
@@ -192,6 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   Widget _inputField({
     required String hint,
     required IconData icon,

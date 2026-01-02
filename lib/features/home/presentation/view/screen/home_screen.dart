@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:order_bite/features/cart/presentation/view/cart_screen.dart';
 import 'package:order_bite/features/home/presentation/view/screen/see_all_products_screen.dart';
 import 'package:order_bite/features/home/presentation/view/screen/slider_Screen.dart';
-import 'package:order_bite/features/profile/presentation/view/profile_screen.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/route_names.dart';
+import '../../../../buyer/cart/presentation/view/cart_screen.dart';
+import '../../../../buyer/profile/presentation/view/profile_screen.dart';
 import '../widgets/category_item.dart';
 import '../widgets/product_card.dart';
 import '../widgets/section_header.dart';
@@ -23,12 +23,12 @@ class HomeScreen extends StatefulWidget {
     "Group/Section": "B",
     "Roll": "41",
   };
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _searchController = TextEditingController();
   final PageController _pageController = PageController();
 
   Timer? _sliderTimer;
@@ -59,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _sliderTimer?.cancel();
     _pageController.dispose();
-    _searchController.dispose();
     super.dispose();
   }
 
@@ -102,8 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             'Protiva',
                             style: GoogleFonts.merriweather(
-                              color: const Color(0xFF10454C),
+                              color: Colors.white,
                               fontSize: 25,
+                              fontWeight: FontWeight.w800
                             ),
                           ),
                         ],
@@ -126,18 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        prefixIcon: const Icon(Icons.search),
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: _border(),
-                        enabledBorder: _border(),
-                        focusedBorder: _border(),
-                      ),
-                    ),
                     const SizedBox(height: 20),
 
                     CarouselExample(),
@@ -170,16 +158,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     SizedBox(height: 15.h),
                     SectionHeader(title: 'Top Sold Today', onSeeAllTap: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));
                     }),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                     SizedBox(height: 15.h),
-                    SectionHeader(title: 'Special', onSeeAllTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
+                    SectionHeader(title: 'Special', onSeeAllTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                     SizedBox(height: 15.h),
-                    SectionHeader(title: 'New', onSeeAllTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
+                    SectionHeader(title: 'New', onSeeAllTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGridScreen()));}),
                     SizedBox(height: 10.h),
                     const ProductCard(),
                   ],
@@ -203,13 +191,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Image.asset(icon,scale: 5,),
       ),
-    );
-  }
-
-  OutlineInputBorder _border() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide.none,
     );
   }
 }
