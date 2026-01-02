@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order_bite/features/cart/presentation/view/cart_screen.dart';
-import 'package:order_bite/features/parent/presentation/view/parent_screen.dart';
 
+import '../../../../parent/presentation/view/parent_screen.dart';
 import 'congratulations_screen.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {

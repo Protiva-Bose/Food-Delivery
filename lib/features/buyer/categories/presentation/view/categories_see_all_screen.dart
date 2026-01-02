@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/constant/app_colors.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});

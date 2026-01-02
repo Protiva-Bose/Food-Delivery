@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:order_bite/features/profile/presentation/view/screens/cancel_order_screen.dart';
-import 'package:order_bite/features/profile/presentation/view/screens/order_screen.dart';
-import 'package:order_bite/features/profile/presentation/view/screens/shop_contacts_screen.dart';
-import 'package:order_bite/features/profile/presentation/view/screens/user_info.dart';
-import '../../../auth/presentation/view/screens/login_screen.dart';
+import 'package:order_bite/features/buyer/profile/presentation/view/screens/cancel_order_screen.dart';
+import 'package:order_bite/features/buyer/profile/presentation/view/screens/order_screen.dart';
+import 'package:order_bite/features/buyer/profile/presentation/view/screens/shop_contacts_screen.dart';
+import 'package:order_bite/features/buyer/profile/presentation/view/screens/user_info.dart';
+import '../../../../auth/presentation/view/screens/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});

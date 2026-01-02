@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order_bite/features/parent/view_model/parent_view_model.dart';
 import 'package:provider/provider.dart';
-import '../../../cart/presentation/view/cart_screen.dart';
-import '../../../categories/presentation/view/category_screen.dart';
-import '../../../home/presentation/view/screen/home_screen.dart';
-import '../../../profile/presentation/view/profile_screen.dart';
+import '../../../../home/presentation/view/screen/home_screen.dart';
+import '../../../check/presentation/view/check_screen.dart';
+import '../../../upload/presentation/view/upload_screen.dart';
+import '../../view_model/parent_view_model.dart';
+import '../view_model/seller_parent_screen_viewmodel.dart';
 
-class ParentScreen extends StatefulWidget {
-  const ParentScreen({super.key});
+class SellerParentScreen extends StatefulWidget {
+  const SellerParentScreen({super.key});
 
   @override
-  State<ParentScreen> createState() => _ParentScreenState();
+  State<SellerParentScreen> createState() => _SellerParentScreenState();
 }
 
-class _ParentScreenState extends State<ParentScreen>
+class _SellerParentScreenState extends State<SellerParentScreen>
     with SingleTickerProviderStateMixin {
   bool _isPressed = false;
   late AnimationController _controller;
@@ -63,7 +63,7 @@ class _ParentScreenState extends State<ParentScreen>
   }
 
   void _handleNavChange(int index) {
-    context.read<ParentViewModel>().changeIndex(index);
+    context.read<SellerParentScreenViewmodel>().changeIndex(index);
 
     setState(() {
       _isPressed = index == 2;
@@ -72,13 +72,13 @@ class _ParentScreenState extends State<ParentScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ParentViewModel>(
+    return Consumer<SellerParentScreenViewmodel>(
       builder: (__, navParentProvider, child) {
         final List<Widget> pages = [
            HomeScreen(),
-           CategoryGrid(),
-           CartScreen(),
-           ProfileScreen(),
+           UploadScreen(),
+           CheckScreen(),
+           CheckScreen(),
         ];
 
         return Scaffold(
@@ -114,7 +114,6 @@ class _ParentScreenState extends State<ParentScreen>
                     children: [
                       SizedBox(width: 15.w),
 
-                      // Home
                       Expanded(
                         child: _buildNavigationDestinationBar(
                           context: context,
@@ -131,14 +130,13 @@ class _ParentScreenState extends State<ParentScreen>
                         ),
                       ),
 
-                      // Notes
                       Expanded(
                         child: _buildNavigationDestinationBar(
                           context: context,
                           index: 1,
-                          label: 'Categories',
-                          iconPath: 'assets/icons/categories_Icon.png',
-                          selectedIconPath: 'assets/icons/categories_Icon.png',
+                          label: 'Upload',
+                          iconPath: 'assets/icons/uploads_icons.png',
+                          selectedIconPath: 'assets/icons/uploads_icons.png',
                           isSelected: navParentProvider.selectedIndex == 1,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
@@ -148,14 +146,13 @@ class _ParentScreenState extends State<ParentScreen>
                         ),
                       ),
 
-                      // Tests
                       Expanded(
                         child: _buildNavigationDestinationBar(
                           context: context,
                           index: 2,
-                          label: 'Cart',
-                          iconPath: 'assets/icons/shops_icon.png',
-                          selectedIconPath: 'assets/icons/shops_icon.png',
+                          label: 'Check',
+                          iconPath: 'assets/icons/check_icon.png',
+                          selectedIconPath: 'assets/icons/check_icon.png',
                           isSelected: navParentProvider.selectedIndex == 2,
                           selectedIconColor: Colors.black,
                           unselectedIconColor: Colors.grey.shade900,
@@ -165,7 +162,6 @@ class _ParentScreenState extends State<ParentScreen>
                         ),
                       ),
 
-                      // Profile
                       Expanded(
                         child: _buildNavigationDestinationBar(
                           context: context,
@@ -181,7 +177,6 @@ class _ParentScreenState extends State<ParentScreen>
                           scale: 4.2,
                         ),
                       ),
-
                       SizedBox(width: 12.w),
                     ],
                   ),
@@ -217,11 +212,6 @@ class _ParentScreenState extends State<ParentScreen>
             GestureDetector(
               onTap: () => _handleNavChange(index),
               child: Image.asset(iconPath,color: isSelected? Color(0xff00C7C0) : Colors.grey.shade600,scale: scale,),
-              // child: Image.asset(
-              //   isSelected ? selectedIconPath : iconPath,
-              //   width: width,
-              //   height: height,
-              // ),
             ),
             SizedBox(height: 6.h),
             Text(

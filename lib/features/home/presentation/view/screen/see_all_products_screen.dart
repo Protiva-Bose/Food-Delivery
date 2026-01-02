@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:order_bite/features/home/presentation/view/screen/home_screen.dart';
-import 'package:order_bite/features/parent/presentation/view/parent_screen.dart';
+import '../../../../buyer/parent/presentation/view/parent_screen.dart';
 
 class FoodGridScreen extends StatelessWidget {
   const FoodGridScreen({super.key});
