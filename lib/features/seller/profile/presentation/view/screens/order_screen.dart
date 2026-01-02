@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class OrdersScreen extends StatelessWidget {
   final List<Map<String, dynamic>> orders;
@@ -11,11 +10,7 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Orders",style: GoogleFonts.merriweather(
-        fontWeight: FontWeight.w600,fontSize: 18.sp,
-      ),),leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios)),),
+      appBar: AppBar(title: const Text("My Orders")),
       body: ListView(
         padding: EdgeInsets.all(12.w),
         children: orders.map((order) {

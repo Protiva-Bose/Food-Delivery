@@ -7,8 +7,8 @@ import 'package:order_bite/features/buyer/profile/presentation/view/screens/orde
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/shop_contacts_screen.dart';
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/user_info.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+class SellerProfileScreen extends StatelessWidget {
+  SellerProfileScreen({super.key});
 
   void showLogoutDialog(BuildContext context,) {
     showDialog(
@@ -96,10 +96,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
-      appBar: AppBar(title: Text("Profile",style: GoogleFonts.merriweather(
-        fontSize: 20.sp,
-      ),), centerTitle: true,
-  automaticallyImplyLeading: false,),
+      appBar: AppBar(title: const Text("Profile"), centerTitle: true),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(12.w),

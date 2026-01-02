@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:order_bite/features/buyer/cart/presentation/view/screens/food_selected_screen.dart';
 import 'package:order_bite/features/buyer/cart/presentation/view/screens/order_confirmation_screen.dart';
 
 class CartScreen extends StatelessWidget {
+  final quantity = 1;
+  final TextEditingController _searchController = TextEditingController();
+
   CartScreen({super.key});
 
   final List<Map<String, dynamic>> stalls = [
@@ -90,18 +94,39 @@ class CartScreen extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (_) => OrderConfirmationScreen(
-            stallName: stall['name'],
-            selectedFoods: selectedFoods,
+            stallName: "Burger Stall",
+            selectedFoods: [
+              {
+                "name": "Chicken Burger",
+                "price": 80.0,
+                "weight": "120g",
+                "isVeg": false,
+                "quantity": quantity,
+              }
+            ],
+            userName: "John Doe",
+            userId: "12345",
           ),
         ),
       );
+
     }
+  }
+
+  OutlineInputBorder _border() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide.none,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Select a Stall"),
+      backgroundColor: Colors.blue.shade50,
+      appBar: AppBar(title: Text("Select a Stall",style: GoogleFonts.merriweather(
+        fontWeight: FontWeight.w600,fontSize: 18.sp,
+      ),),
       leading: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Image.asset('assets/icons/stall.png',scale: 3,),
@@ -109,31 +134,49 @@ class CartScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(12.w),
-          child: ListView.builder(
-            itemCount: stalls.length,
-            itemBuilder: (context, index) {
-              final stall = stalls[index];
-              return GestureDetector(
-                onTap: () => showFoodDialog(context, stall),
-                child: SizedBox(
-                  height: 80.h,
-                  child: Card(
-                    color: Colors.white,
-                    margin: EdgeInsets.symmetric(vertical: 8.h),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: Image.asset(stall['icon'], width: 50.w, height: 50.h),
-                        title: Text(stall['name'], style: TextStyle(fontWeight: FontWeight.bold)),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                      ),
-                    ),
-                  ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  prefixIcon: const Icon(Icons.search),
+                  filled: true,
+                  fillColor: Colors.grey.shade50,
+                  border: _border(),
+                  enabledBorder: _border(),
+                  focusedBorder: _border(),
                 ),
-              );
-            },
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: stalls.length,
+                  itemBuilder: (context, index) {
+                    final stall = stalls[index];
+                    return GestureDetector(
+                      onTap: () => showFoodDialog(context, stall),
+                      child: SizedBox(
+                        height: 80.h,
+                        child: Card(
+                          color: Colors.white,
+                          margin: EdgeInsets.symmetric(vertical: 8.h),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                          elevation: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(
+                              leading: Image.asset(stall['icon'], width: 50.w, height: 50.h),
+                              title: Text(stall['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+                              trailing: const Icon(Icons.arrow_forward_ios),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

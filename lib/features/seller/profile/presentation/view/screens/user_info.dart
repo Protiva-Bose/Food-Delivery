@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'edit_user_info_screen.dart';
 
 class UserInfoScreen extends StatefulWidget {
@@ -15,11 +14,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("User Information",style: GoogleFonts.merriweather(
-        fontWeight: FontWeight.w600,fontSize: 18.sp,
-      ),),leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios)),),
+      appBar: AppBar(title: const Text("User Information")),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(

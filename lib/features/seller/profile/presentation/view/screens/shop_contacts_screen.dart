@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ShopContactsScreen extends StatelessWidget {
   final List<Map<String, String>> shopContacts;
@@ -9,13 +8,7 @@ class ShopContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        title: Text("Shop Contacts",style: GoogleFonts.merriweather(
-          fontWeight: FontWeight.w600,fontSize: 18.sp,
-        ),),leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios)),),
+      appBar: AppBar(title: const Text("Shop Contacts")),
       body: ListView(
         padding: EdgeInsets.all(12.w),
         children: shopContacts.map((shop) {

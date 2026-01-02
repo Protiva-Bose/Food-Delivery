@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:order_bite/features/home/presentation/view/screen/food_detail_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../../home/presentation/view/screen/home_screen.dart';
 import '../../../check/presentation/view/check_screen.dart';
@@ -77,7 +78,7 @@ class _SellerParentScreenState extends State<SellerParentScreen>
         final List<Widget> pages = [
            HomeScreen(),
            UploadScreen(),
-           CheckScreen(),
+          CheckScreen(),
            CheckScreen(),
         ];
 

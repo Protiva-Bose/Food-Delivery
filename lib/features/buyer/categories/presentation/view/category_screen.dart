@@ -5,12 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../home/presentation/view/widgets/category_item.dart';
 
 class CategoryGrid extends StatelessWidget {
+  final TextEditingController _searchController = TextEditingController();
   final List<Map<String, dynamic>> categories = List.generate(
     12,
         (index) => {
       "title": "Category ${index + 1}",
       "icon": "assets/icons/chicken_icon.png",
-      "description": "Delicious food with fresh ingredients, freshly cooked for you.",
+      "description": '''🍤 Prawn Fry Description
+Prawn Fry is a flavorful seafood dish made with fresh, tender prawns that are marinated in aromatic spices and shallow-fried to perfection. The prawns are crispy on the outside and juicy on the inside, offering a rich blend of spicy, savory, and mildly tangy flavors. It is commonly served as a starter or side dish and pairs perfectly with rice, flatbreads, or as a snack.
+
+Ingredients:
+Fresh prawns (cleaned and deveined), Vegetable oil, Onion (finely sliced), Garlic, Ginger, Green chilies, Turmeric powder, Red chili powder, Black pepper, Salt (to taste), Lemon juice, Curry leaves
+Optional spices: garam masala, coriander powder ''',
       "price": "\$${(index + 1) * 2 + 5}",
       "weight": "${(index + 1) * 50}g",
       "isVeg": index % 2 == 0,
@@ -118,6 +124,13 @@ class CategoryGrid extends StatelessWidget {
     );
   }
 
+  OutlineInputBorder _border() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide.none,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,6 +149,18 @@ class CategoryGrid extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    prefixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                    border: _border(),
+                    enabledBorder: _border(),
+                    focusedBorder: _border(),
+                  ),
+                ),
                 SizedBox(height: 20.h,),
                 GridView.builder(
                   shrinkWrap: true,

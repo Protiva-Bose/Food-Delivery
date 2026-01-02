@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../parent/presentation/view/parent_screen.dart';
 import 'congratulations_screen.dart';
@@ -7,8 +8,16 @@ import 'congratulations_screen.dart';
 class OrderConfirmationScreen extends StatefulWidget {
   final String stallName;
   final List<Map<String, dynamic>> selectedFoods;
+  final String userName;
+  final String userId;
 
-  const OrderConfirmationScreen({super.key, required this.stallName, required this.selectedFoods});
+  const OrderConfirmationScreen({
+    super.key,
+    required this.stallName,
+    required this.selectedFoods,
+    required this.userName,
+    required this.userId,
+  });
 
   @override
   State<OrderConfirmationScreen> createState() => _OrderConfirmationScreenState();
@@ -53,24 +62,26 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
         icon: LottieScreen(),
-        title: const Text("Congratulations!"),
-        content: const Text("Your order has been successfully placed."),
+        title: Text("Congratulations!",style: GoogleFonts.merriweather(fontWeight: FontWeight.w800,fontSize: 20.sp),),
+        content: Text(
+          textAlign: TextAlign.center,
+          "Your order has been successfully placed.",style: GoogleFonts.merriweather(fontWeight: FontWeight.w500,fontSize: 14.sp),),
         actions: [
           Center(
             child: SizedBox(
               width: 100.w,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade900
-                ),
-                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ParentScreen())),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade900),
+                onPressed: () => Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => ParentScreen())),
                 child: const Text("OK"),
-                      ),
+              ),
             ),
           ),
-       ],
+        ],
       ),
     );
   }
@@ -79,20 +90,39 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
-      appBar: AppBar(title: const Text("Confirm Your Order"),
-      backgroundColor: Colors.white,
-      leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios)),),
+      appBar: AppBar(
+        title: Text("Confirm Your Order",style: GoogleFonts.merriweather(
+          fontSize: 18.sp
+        ),),
+        backgroundColor: Colors.blue.shade50,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(12.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Stall: ${widget.stallName}",
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+              Row(spacing: 15,
+                children: [
+                  Image.asset('assets/icons/stall_icon.png',scale: 4.5,),
+                  Text(
+                    "Stall: ${widget.stallName}",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+              Align(alignment: AlignmentGeometry.center,
+                child: Text(
+                  "Customer Name: Protiva${widget.userName} \n          ID: 2102005${widget.userId}",
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold,color: Colors.grey.shade600),
+                ),
               ),
               SizedBox(height: 12.h),
               Text(
@@ -116,14 +146,16 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                           children: [
                             CircleAvatar(
                               backgroundColor: food['isVeg'] ? Colors.green : Colors.red,
-                              child: Text(food['isVeg'] ? "V" : "N", style: const TextStyle(color: Colors.white)),
+                              child: Text(food['isVeg'] ? "V" : "N",
+                                  style: const TextStyle(color: Colors.white)),
                             ),
                             SizedBox(width: 12.w),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(food['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+                                  Text(food['name'],
+                                      style: TextStyle(fontWeight: FontWeight.bold)),
                                   Text("\$${food['price']}"),
                                 ],
                               ),
@@ -134,7 +166,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                                   icon: const Icon(Icons.remove_circle_outline),
                                   onPressed: () => decrementQuantity(index),
                                 ),
-                                Text(qty.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(qty.toString(),
+                                    style: TextStyle(fontWeight: FontWeight.bold)),
                                 IconButton(
                                   icon: const Icon(Icons.add_circle_outline),
                                   onPressed: () => incrementQuantity(index),
@@ -182,8 +215,12 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Total:", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-                  Text("\$${totalPrice.toStringAsFixed(2)}", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                  Text("Total:",
+                      style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                  Text("\$${totalPrice.toStringAsFixed(2)}",
+                      style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
                 ],
               ),
               SizedBox(height: 12.h),
@@ -191,11 +228,12 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 width: double.infinity,
                 height: 40.h,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade900
-                  ),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade900),
                   onPressed: showCongratulationsDialog,
-                  child:  Text("Done",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w800),),
+                  child: Text(
+                    "Done",
+                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                  ),
                 ),
               ),
             ],

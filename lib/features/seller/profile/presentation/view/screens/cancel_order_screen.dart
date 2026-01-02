@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CancelOrderScreen extends StatefulWidget {
   final List<Map<String, dynamic>> orders;
@@ -37,11 +36,7 @@ class _CancelOrderScreenState extends State<CancelOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cancel Orders",style: GoogleFonts.merriweather(
-        fontWeight: FontWeight.w600,fontSize: 18.sp,
-      ),),leading: IconButton(onPressed: (){
-    Navigator.pop(context);
-    }, icon: Icon(Icons.arrow_back_ios)),),
+      appBar: AppBar(title: const Text("Cancel Orders")),
       body: confirmedOrders.isEmpty
           ? Center(
         child: Text(
