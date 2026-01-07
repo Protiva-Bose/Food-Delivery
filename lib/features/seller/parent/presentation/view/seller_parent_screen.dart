@@ -4,6 +4,7 @@ import 'package:order_bite/features/home/presentation/view/screen/food_detail_sc
 import 'package:provider/provider.dart';
 import '../../../../home/presentation/view/screen/home_screen.dart';
 import '../../../check/presentation/view/check_screen.dart';
+import '../../../profile/presentation/view/profile_screen.dart';
 import '../../../upload/presentation/view/upload_screen.dart';
 import '../../view_model/parent_view_model.dart';
 import '../view_model/seller_parent_screen_viewmodel.dart';
@@ -79,7 +80,7 @@ class _SellerParentScreenState extends State<SellerParentScreen>
            HomeScreen(),
            UploadScreen(),
           CheckScreen(),
-           CheckScreen(),
+          SellerProfileScreen(),
         ];
 
         return Scaffold(

@@ -19,6 +19,8 @@ class RouteNames {
   static const String sellerParentScreen = '/sellerParentScreen';
   static const String checkScreen = '/checkScreen';
   static const String uploadScreen = '/uploadScreen';
+  static const String topSellingFoodGraphScreen = '/topSellingFoodGraphScreen';
   static const String foodDetailsScreen = '/foodDetailsScreen';
   static const String sellerProfileScreen = '/sellerProfileScreen';
+  static const String postedFoodItemScreen = '/postedFoodItemScreen';
 }

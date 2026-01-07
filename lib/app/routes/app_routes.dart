@@ -15,6 +15,8 @@ import '../../features/onboarding/presentation/view/onboarding_screen.dart';
 import '../../features/seller/check/presentation/view/check_screen.dart';
 import '../../features/seller/parent/presentation/view/seller_parent_Screen.dart';
 import '../../features/seller/profile/presentation/view/profile_screen.dart';
+import '../../features/seller/profile/presentation/view/screens/graph_chart_screen.dart';
+import '../../features/seller/profile/presentation/view/screens/posted_food_item_screen.dart';
 import '../../features/seller/upload/presentation/view/upload_screen.dart';
 import '../../features/splash/presentation/view/splash_screen.dart';
 
@@ -43,6 +45,8 @@ class AppRoutes {
     RouteNames.sellerParentScreen: (context) =>SellerParentScreen(),
     RouteNames.checkScreen: (context) =>CheckScreen(),
     RouteNames.uploadScreen: (context) =>UploadScreen(),
+    RouteNames.topSellingFoodGraphScreen: (context) =>TopSellingFoodGraphScreen(),
+    RouteNames.postedFoodItemScreen: (context) =>PostedFoodItemScreen(),
     RouteNames.sellerProfileScreen: (context) =>SellerProfileScreen(),
     RouteNames.foodDetailsScreen: (context) =>FoodDetailsScreen(item: {}, userName: '', userId: '',),
 
