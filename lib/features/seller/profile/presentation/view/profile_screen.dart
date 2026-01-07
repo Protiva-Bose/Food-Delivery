@@ -1,16 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:order_bite/core/constant/route_names.dart';
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/cancel_order_screen.dart';
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/order_screen.dart';
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/shop_contacts_screen.dart';
 import 'package:order_bite/features/buyer/profile/presentation/view/screens/user_info.dart';
+import 'package:order_bite/features/seller/profile/presentation/view/screens/graph_chart_screen.dart';
+import 'package:order_bite/features/seller/profile/presentation/view/screens/posted_food_item_screen.dart';
 
-class SellerProfileScreen extends StatelessWidget {
-  SellerProfileScreen({super.key});
+class SellerProfileScreen extends StatefulWidget {
+  const SellerProfileScreen({super.key});
 
-  void showLogoutDialog(BuildContext context,) {
+  @override
+  State<SellerProfileScreen> createState() => _SellerProfileScreenState();
+}
+
+class _SellerProfileScreenState extends State<SellerProfileScreen> {
+  File? _profileImage;
+  final ImagePicker _picker = ImagePicker();
+
+  /// IMAGE PICKER FUNCTION
+  Future<void> _pickImage() async {
+    final XFile? image =
+    await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _profileImage = File(image.path);
+      });
+    }
+  }
+
+  void showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -21,15 +46,23 @@ class SellerProfileScreen extends StatelessWidget {
         ),
         title: Column(
           children: [
-            Image.asset('assets/icons/logout_sticker.png',scale: 2.5,),
-             Text('Logout',style: GoogleFonts.merriweather(
-              fontSize: 30,fontWeight: FontWeight.w800
-            ),),
+            Image.asset(
+              'assets/icons/logout_sticker.png',
+              scale: 2.5,
+            ),
+            Text(
+              'Logout',
+              style: GoogleFonts.merriweather(
+                fontSize: 30,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
           ],
         ),
-        content: const Text('Are you sure you want to log out of your account?',style: TextStyle(
-          fontSize: 16
-        ),),
+        content: const Text(
+          'Are you sure you want to log out of your account?',
+          style: TextStyle(fontSize: 16),
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -48,7 +81,11 @@ class SellerProfileScreen extends StatelessWidget {
               ),
             ),
             onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, RouteNames.loginScreen, (predicate) => false);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteNames.loginScreen,
+                    (predicate) => false,
+              );
             },
             child: const Text('Logout'),
           ),
@@ -59,7 +96,6 @@ class SellerProfileScreen extends StatelessWidget {
 
   final Map<String, String> userInfo = {
     "Name": "John Doe",
-    "Email": "johndoe@example.com",
     "Phone": "+1234567890",
     "College": "ABC",
     "Department": "Science",
@@ -98,106 +134,127 @@ class SellerProfileScreen extends StatelessWidget {
       backgroundColor: Colors.blue.shade50,
       appBar: AppBar(title: const Text("Profile"), centerTitle: true),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: Column(
-            children: [
-          Center(
-          child: Stack(
-          children: [
-            CircleAvatar(
-            radius: 60.r,
-            backgroundColor: Colors.blue.shade100,
-            backgroundImage: AssetImage("assets/images/profile_image.png"),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: InkWell(
-              onTap: () {
-
-              },
-              child: CircleAvatar(
-                radius: 18.r,
-                backgroundColor: Colors.blue.shade900,
-                child: const Icon(Icons.edit, color: Colors.white, size: 20),
-              ),
-            ),
-          ),
-          ],
-        ),
-      ),
-
-        SizedBox(height: 16.h),
-
-              _buildCard(
-                context,
-                title: "User Information",
-                icon: 'assets/icons/user_icon.png',
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => UserInfoScreen(userInfo: userInfo),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(12.w),
+            child: Column(
+              children: [
+                /// PROFILE IMAGE
+                Center(
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 60.r,
+                        backgroundColor: Colors.blue.shade100,
+                        backgroundImage: _profileImage != null
+                            ? FileImage(_profileImage!)
+                            : const AssetImage(
+                          "assets/images/profile_image.png",
+                        ) as ImageProvider,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: InkWell(
+                          onTap: _pickImage,
+                          child: CircleAvatar(
+                            radius: 18.r,
+                            backgroundColor: Colors.blue.shade900,
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              SizedBox(height: 12.h),
-
-              _buildCard(
-                context,
-                title: "My Orders",
-                icon: 'assets/icons/orders_icon.png',
-                onTap: () => Navigator.push(
+          
+                SizedBox(height: 16.h),
+          
+                Align(
+                    alignment: Alignment.center,
+                    child: Text('pro@gmail.com',style: GoogleFonts.merriweather(fontWeight: FontWeight.w700,fontSize: 14.sp))),
+                SizedBox(height: 16.h),
+          
+                _buildCard(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => OrdersScreen(
-                      orders: orders,
-                      getStatusColor: getStatusColor,
+                  title: "User Information",
+                  icon: 'assets/icons/user_icon.png',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => UserInfoScreen(userInfo: userInfo),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 12.h),
-
-              _buildCard(
-                context,
-                title: "Shop Contacts",
-                icon: 'assets/icons/contact_icon.png',
-                onTap: () => Navigator.push(
+                SizedBox(height: 22.h),
+          
+                _buildCard(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => ShopContactsScreen(shopContacts: shopContacts),
+                  title: "Posted Items",
+                  icon: 'assets/icons/orders_icon.png',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PostedFoodItemScreen(
+                      ),
+                    ),
                   ),
                 ),
-              ),SizedBox(height: 12.h),
-
-              _buildCard(
-                context,
-                title: "Cancel Orders",
-                icon: 'assets/icons/cancel_icon.png',
-                onTap: () => Navigator.push(
+                SizedBox(height: 22.h),
+          
+                // _buildCard(
+                //   context,
+                //   title: "Shop Contacts",
+                //   icon: 'assets/icons/contact_icon.png',
+                //   onTap: () => Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (_) =>
+                //           ShopContactsScreen(shopContacts: shopContacts),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(height: 22.h),
+          
+                _buildCard(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => CancelOrderScreen(orders: orders,),
+                  title: "Show Graphical View",
+                  icon: 'assets/icons/graph.png',
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TopSellingFoodGraphScreen(
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 12.h),
-              _buildCard(
-                context,
-                title: "Logout",
-                icon: 'assets/icons/logout.png',
-                onTap: () => showLogoutDialog(context)
-              ),
-            ],
+                SizedBox(height: 22.h),
+          
+                _buildCard(
+                  context,
+                  title: "Logout",
+                  icon: 'assets/icons/logout.png',
+                  onTap: () => showLogoutDialog(context),
+                ),
+                SizedBox(height: 30.h),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCard(BuildContext context,
-      {required String title, required String icon, required VoidCallback onTap}) {
+  Widget _buildCard(
+      BuildContext context, {
+        required String title,
+        required String icon,
+        required VoidCallback onTap,
+      }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -218,7 +275,8 @@ class SellerProfileScreen extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+        contentPadding:
+        EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         leading: Image.asset(icon, scale: 4),
         title: Text(
           title,

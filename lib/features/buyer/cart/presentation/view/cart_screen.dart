@@ -86,7 +86,7 @@ class CartScreen extends StatelessWidget {
   void showFoodDialog(BuildContext context, Map<String, dynamic> stall) async {
     final selectedFoods = await showDialog<List<Map<String, dynamic>>>(
       context: context,
-      builder: (_) => FoodSelectionDialog(stall: stall),
+      builder: (_) => FoodSelectionDialog(stall: stall, userName: '', userId: '',),
     );
 
     if (selectedFoods != null && selectedFoods.isNotEmpty) {
